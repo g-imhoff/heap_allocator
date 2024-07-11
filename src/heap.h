@@ -1,6 +1,6 @@
 #pragma once
 
-#include "heap.h"
+#include "common.h"
 
 #define HEAP_MAX_SIZE 64000000
 
@@ -20,3 +20,4 @@ typedef struct {
 extern heap_info heap = {0};
 
 void heap_init();
+void heap_add_node(heap_node new);
