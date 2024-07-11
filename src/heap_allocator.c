@@ -10,6 +10,15 @@ heap_info heap = {0};
  *
  */
 
+void heap_init() {
+  heap.max = HEAP_MAX_SIZE;
+  heap.actual_size = 0;
+  heap.addr = mmap(NULL, HEAP_MAX_SIZE, PROT_READ | PROT_WRITE,
+                   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+  heap.heap = NULL;
+  heap.is_init = 1;
+}
+
 heap_node *node_init(void *heap_node_addr, void *addr, size_t size) {
   heap_node *new_ptr = heap_node_addr;
 
@@ -23,6 +32,7 @@ heap_node *node_init(void *heap_node_addr, void *addr, size_t size) {
 void heap_add_node(heap_node *node_ptr) {
   if (heap.heap == NULL) {
     heap.heap = node_ptr;
+    return;
   }
 
   heap_node *tmp = heap.heap;
