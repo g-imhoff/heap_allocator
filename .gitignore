@@ -1,2 +1,2 @@
-./heap_allocator
-./obj/
+heap_allocator
+obj/
