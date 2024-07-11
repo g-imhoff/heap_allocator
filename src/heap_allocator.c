@@ -19,7 +19,7 @@ void *heap_alloc(size_t size) {
     heap_init();
   }
 
-  if (heap.contains_free_memory & (size < heap.highest_free_memory)) {
+  if (heap.contains_free_memory & (size + 1 < heap.highest_free_memory)) {
     // needs to find the lowest higher memory size that we need to fragment
     void *addr = heap_free_alloc(size);
     return addr;

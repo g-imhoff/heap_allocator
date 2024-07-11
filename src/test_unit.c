@@ -11,7 +11,7 @@ int main() {
   heap_free(c);
   heap_free(f);
 
-  char *h = heap_alloc(150 * sizeof(char));
+  char *h = heap_alloc(190 * sizeof(char));
 
   print_heap_node();
 
