@@ -1,14 +1,9 @@
 #pragma once
 
 #include "common.h"
+#include "heap_node.h"
 
 #define HEAP_MAX_SIZE 64000000
-
-typedef struct h_node {
-  size_t node_size;
-  void *addr;
-  struct h_node *next;
-} heap_node;
 
 typedef struct {
   int is_init;

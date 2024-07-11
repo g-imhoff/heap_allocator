@@ -19,30 +19,6 @@ void heap_init() {
   heap.is_init = 1;
 }
 
-heap_node *node_init(void *heap_node_addr, void *addr, size_t size) {
-  heap_node *new_ptr = heap_node_addr;
-
-  new_ptr->addr = addr;
-  new_ptr->node_size = size;
-  new_ptr->next = NULL;
-
-  return new_ptr;
-}
-
-void heap_add_node(heap_node *node_ptr) {
-  if (heap.heap == NULL) {
-    heap.heap = node_ptr;
-    return;
-  }
-
-  heap_node *tmp = heap.heap;
-  while (tmp->next) {
-    tmp = tmp->next;
-  }
-
-  tmp->next = node_ptr;
-}
-
 void *heap_alloc(size_t size) {
   if (!heap.is_init) {
     heap_init();

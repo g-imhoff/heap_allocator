@@ -2,21 +2,11 @@
 #include "heap.h"
 
 int main() {
-  char *c = heap_alloc(5 * sizeof(char));
+  char *c = heap_alloc(100000 * sizeof(char));
+  char *d = heap_alloc(140 * sizeof(char));
+  char *e = heap_alloc(500 * sizeof(char));
+  char *f = heap_alloc(200 * sizeof(char));
+  char *g = heap_alloc(250 * sizeof(char));
 
-  for (int i = 0; i < 5; i++) {
-    c[i] = 'a' + i;
-  }
-
-  printf("%s\n", c);
-  printf("%ld\n", heap.actual_size);
-
-  char *d = heap_alloc(5 * sizeof(char));
-
-  for (int i = 0; i < 5; i++) {
-    d[i] = 'f' + i;
-  }
-
-  printf("%s\n", d);
-  printf("%ld\n", heap.actual_size);
+  print_heap_node();
 }
