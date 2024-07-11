@@ -7,29 +7,36 @@
  * This just init the node lonely
  *
  */
-heap_node node_init(void *addr, size_t size) {
-  heap_node init;
+heap_node *node_init(void *addr, size_t size) {
+  heap_node *new_ptr = addr - 1;
 
-  init.node_size = size;
-  init.addr = addr;
-  init.next = NULL;
+  new_ptr->addr = addr;
+  new_ptr->node_size = size;
+  new_ptr->next = NULL;
 
-  return init;
+  return new_ptr;
 }
 
-void heap_add_node(void *addr, size_t size) {}
-
-void *heap_alloc(size_t size) {
-  if (!heap.is_init) {
-    heap_init();
-  } else if (heap.actual_size + size >= heap.max) {
-    perror("Heap no more size");
+void heap_add_node(heap_node *node_ptr) {
+  if (heap.heap == NULL) {
+    heap.heap = node_ptr;
   }
 
-  void *addr = heap.addr + heap.actual_size;
+  heap_node *tmp = heap.heap;
+  while (tmp) {
+    tmp = tmp->next;
+  }
 
-  heap_node new = node_init(addr, size);
-  heap_add_node(addr, size);
+  tmp->next = node_ptr;
+}
+
+void *heap_alloc(size_t size) {
+  heap_init();
+
+  void *addr = (void *)(1 + heap.addr + heap.actual_size);
+
+  heap_node *new_ptr = node_init(addr, size);
+  heap_add_node(new_ptr);
 
   heap.actual_size += size;
 

@@ -2,7 +2,11 @@
 #include "heap.h"
 
 int main() {
-  char *c = (char *)malloc(1 * sizeof(char));
+  char *c = heap_alloc(5 * sizeof(char));
 
-  free(c);
+  for (int i = 0; i < 5; i++) {
+    c[i] = 'a' + i;
+  }
+
+  printf("%s", c);
 }

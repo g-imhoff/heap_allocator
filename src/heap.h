@@ -11,14 +11,14 @@ typedef struct h_node {
 } heap_node;
 
 typedef struct {
-  int is_init;
   size_t max;
   size_t actual_size;
   void *addr;
   struct h_node *heap;
 } heap_info;
 
-extern heap_info heap = {0};
+extern heap_info heap;
 
 void heap_init();
-void heap_add_node(void *addr, size_t size);
+heap_node *node_init(void *addr, size_t size);
+void *heap_alloc(size_t size);
