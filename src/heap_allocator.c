@@ -4,12 +4,6 @@
 
 heap_info heap = {0};
 
-/**
- *
- * This just init the node lonely
- *
- */
-
 void heap_init() {
   heap.max = HEAP_MAX_SIZE;
   heap.actual_size = 0;

@@ -5,6 +5,7 @@
 typedef struct h_node {
   size_t node_size;
   void *addr;
+  bool free;
   struct h_node *next;
 } heap_node;
 

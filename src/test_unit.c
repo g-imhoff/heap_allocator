@@ -8,5 +8,7 @@ int main() {
   char *f = heap_alloc(200 * sizeof(char));
   char *g = heap_alloc(250 * sizeof(char));
 
+  heap_free(c);
+  heap_free(f);
   print_heap_node();
 }

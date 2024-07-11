@@ -7,6 +7,7 @@ heap_node *node_init(void *heap_node_addr, void *addr, size_t size) {
   new_ptr->addr = addr;
   new_ptr->node_size = size;
   new_ptr->next = NULL;
+  new_ptr->free = false;
 
   return new_ptr;
 }
@@ -30,8 +31,8 @@ void print_heap_node() {
   int i = 0;
 
   while (tmp) {
-    printf("This is the %d node, address : %p, size : %ld\n", i, tmp->addr,
-           tmp->node_size);
+    printf("This is the %d node, address : %p, size : %ld, free : %d\n", i,
+           tmp->addr, tmp->node_size, tmp->free);
 
     tmp = tmp->next;
     i++;
