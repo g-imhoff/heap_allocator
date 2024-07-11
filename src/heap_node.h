@@ -12,3 +12,6 @@ typedef struct h_node {
 heap_node *node_init(void *heap_node_addr, void *addr, size_t size);
 void heap_add_node(heap_node *node_ptr);
 void print_heap_node();
+size_t heap_sizeof(void *addr);
+void *heap_node_alloc();
+void *heap_free_alloc(size_t size);

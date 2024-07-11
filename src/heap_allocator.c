@@ -1,5 +1,6 @@
 #include "common.h"
 #include "heap.h"
+#include "heap_node.h"
 #include <sys/mman.h>
 
 heap_info heap = {0};
@@ -18,13 +19,16 @@ void *heap_alloc(size_t size) {
     heap_init();
   }
 
-  void *heap_node_addr = (void *)(heap.addr + heap.actual_size);
+  if (heap.contains_free_memory & (size < heap.highest_free_memory)) {
+    // needs to find the lowest higher memory size that we need to fragment
+    void *addr = heap_free_alloc(size);
+    return addr;
+  }
+
+  void *heap_node_addr = heap_node_alloc();
   heap.actual_size += sizeof(heap_node) + 1;
   void *addr = (void *)(heap.addr + heap.actual_size);
   heap.actual_size += size + 1;
-
-  printf("c calculated address : %p, heap_node calculated address : %p\n",
-         (void *)addr, (void *)heap_node_addr);
 
   heap_node *new_ptr = node_init(heap_node_addr, addr, size);
   heap_add_node(new_ptr);

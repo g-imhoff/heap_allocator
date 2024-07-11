@@ -10,5 +10,10 @@ int main() {
 
   heap_free(c);
   heap_free(f);
+
+  char *h = heap_alloc(150 * sizeof(char));
+
   print_heap_node();
+
+  printf("Highest memory free : %ld\n", heap.highest_free_memory);
 }
