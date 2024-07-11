@@ -19,9 +19,12 @@ void heap_free(void *addr) {
     if (tmp->addr == addr) {
       tmp->free = true;
 
+      addr = NULL;
       return;
     }
 
     tmp = tmp->next;
   }
+
+  addr = NULL;
 }
