@@ -11,7 +11,6 @@ void test_fill(int *ptr, size_t size) {
 
 int main() {
   srand(time(NULL));
-  int r = rand();
 
   int *c = heap_alloc(100000 * sizeof(int));
   test_fill(c, 100000);
@@ -35,7 +34,7 @@ int main() {
   test_fill(h, 190);
 
   print_heap_node();
-  printf("Random value : c = %d, d = %d, e = %d, f = %d, g = %d, h = %d\n",
+  printf("Random value : c = %d, d = %d, e = %d, f = %d, g = %d, h = %d",
          c[11111], d[112], e[3], f[132], g[249], h[190]);
   printf("Highest memory free : %ld\n", heap.highest_free_memory);
 }
