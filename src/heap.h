@@ -21,5 +21,5 @@ typedef struct {
 extern heap_info heap;
 
 void heap_init();
-heap_node *node_init(void *addr, size_t size);
+heap_node *node_init(void *heap_node_addr, void *addr, size_t size);
 void *heap_alloc(size_t size);

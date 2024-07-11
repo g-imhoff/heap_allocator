@@ -10,8 +10,8 @@ heap_info heap = {0};
  *
  */
 
-heap_node *node_init(void *addr, size_t size) {
-  heap_node *new_ptr = addr - 1;
+heap_node *node_init(void *heap_node_addr, void *addr, size_t size) {
+  heap_node *new_ptr = heap_node_addr;
 
   new_ptr->addr = addr;
   new_ptr->node_size = size;
@@ -26,7 +26,7 @@ void heap_add_node(heap_node *node_ptr) {
   }
 
   heap_node *tmp = heap.heap;
-  while (tmp) {
+  while (tmp->next) {
     tmp = tmp->next;
   }
 
@@ -38,12 +38,16 @@ void *heap_alloc(size_t size) {
     heap_init();
   }
 
+  void *heap_node_addr = (void *)(heap.addr + heap.actual_size);
+  heap.actual_size += sizeof(heap_node) + 1;
   void *addr = (void *)(heap.addr + heap.actual_size);
+  heap.actual_size += size + 1;
 
-  // heap_node *new_ptr = node_init(addr, size);
-  // heap_add_node(new_ptr);
+  printf("c calculated address : %p, heap_node calculated address : %p\n",
+         (void *)addr, (void *)heap_node_addr);
 
-  heap.actual_size += size;
+  heap_node *new_ptr = node_init(heap_node_addr, addr, size);
+  heap_add_node(new_ptr);
 
   return addr;
 }
