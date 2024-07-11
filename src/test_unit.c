@@ -9,4 +9,5 @@ int main() {
   }
 
   printf("%s", c);
+  printf("%ld", heap.actual_size);
 }

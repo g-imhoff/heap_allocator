@@ -11,6 +11,7 @@ typedef struct h_node {
 } heap_node;
 
 typedef struct {
+  int is_init;
   size_t max;
   size_t actual_size;
   void *addr;
