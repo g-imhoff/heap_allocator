@@ -20,6 +20,12 @@ void test_fill(int *ptr, size_t size) {
   }
 }
 
+void malloc_test() {
+  int *i = malloc(2 * sizeof(int));
+
+  i[3] = 2; // WTF THIS WORKS ????
+}
+
 void int_test() {
   int *c = heap_alloc(100000 * sizeof(int));
   test_fill(c, 100000);
@@ -88,6 +94,6 @@ int main() {
   srand(time(NULL));
 
   test_print_heap_info();
-  str_test();
+  malloc_test();
   test_print_heap_info();
 }
