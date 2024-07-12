@@ -1,11 +1,12 @@
 CC = gcc
-CFLAGS = -g3 #-Wall -Wextra -Werror -pedantic
+CFLAGS = -fPIC -g3 #-Wall -Wextra -Werror -pedantic
 EXEC = heap_allocator 
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=obj/%.o)
 DEPS = $(wildcard src/*.h)
 
 $(EXEC): $(OBJ)
+	$(CC) -shared -o $@.so $^
 	$(CC) $(CFLAGS) -o $@ $^
 
 obj/%.o: src/%.c $(DEPS)

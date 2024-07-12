@@ -26,5 +26,5 @@ typedef struct {
 
 extern heap_info heap;
 
-void *heap_alloc(size_t size);
-void heap_free(void *addr);
+extern void *heap_alloc(size_t size);
+extern void heap_free(void *addr);

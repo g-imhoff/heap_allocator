@@ -1,2 +1,3 @@
 heap_allocator
+heap_allocator.so
 obj/
