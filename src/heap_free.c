@@ -4,15 +4,15 @@
 
 void heap_free(void *addr) {
   heap_node *tmp = heap.heap;
+  size_t size = heap_sizeof(addr);
 
   if (heap.contains_free_memory) {
-    size_t size = heap_sizeof(addr);
 
     heap.highest_free_memory =
         size > heap.highest_free_memory ? size : heap.highest_free_memory;
   } else {
     heap.contains_free_memory = true;
-    heap.highest_free_memory = heap_sizeof(addr);
+    heap.highest_free_memory = size;
   }
 
   while (tmp) {
@@ -24,4 +24,6 @@ void heap_free(void *addr) {
 
     tmp = tmp->next;
   }
+
+  heap.actual_size -= size;
 }
