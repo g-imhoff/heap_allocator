@@ -1,7 +1,17 @@
 #include "./common.h"
 #include "heap.h"
+#include "heap_node.h"
 #include <stdlib.h>
 #include <time.h>
+
+void test_print_heap_info() {
+  printf("This is the information on the heap :\n");
+  printf("Is it init : %s\n", heap.is_init == 1 ? "yes" : "no");
+  printf("Actual_size : %ld\n", heap.actual_size);
+  printf("Does it contain free memory : %s, highest free memory : %ld\n",
+         heap.contains_free_memory ? "yes" : "no", heap.highest_free_memory);
+  printf("\n");
+}
 
 void test_fill(int *ptr, size_t size) {
   for (int i = 0; i < size; i++) {
@@ -9,9 +19,7 @@ void test_fill(int *ptr, size_t size) {
   }
 }
 
-int main() {
-  srand(time(NULL));
-
+void int_test() {
   int *c = heap_alloc(100000 * sizeof(int));
   test_fill(c, 100000);
 
@@ -33,8 +41,50 @@ int main() {
   int *h = heap_alloc(190 * sizeof(int));
   test_fill(h, 190);
 
-  print_heap_node();
-  printf("Random value : c = %d, d = %d, e = %d, f = %d, g = %d, h = %d",
+  int *i = heap_alloc(9 * sizeof(int));
+  test_fill(i, 9);
+
+  printf("Random value : c = %d, d = %d, e = %d, f = %d, g = %d, h = %d\n",
          c[11111], d[112], e[3], f[132], g[249], h[190]);
   printf("Highest memory free : %ld\n", heap.highest_free_memory);
+  print_heap_node();
+
+  // Testing that the limit works well between fragments
+  printf("last element of e : %d, first element of h : %d\n", e[499], h[0]);
+  printf("last element of h : %d, first element of i : %d\n", h[189], i[0]);
+  printf("last element of i : %d, first element of g : %d\n", i[8], g[0]);
+
+  // Same Test but by checking directly the address
+  printf("address of last element of e : %p, Address of h : %p\n", &e[499], h);
+  printf("address of last element of h : %p, Address of h : %p\n", &h[189], i);
+  printf("address of last element of i : %p, Address of g : %p\n", &i[8], g);
+  printf("sizeof heap_node : %ld", sizeof(heap_node));
+}
+
+void str_test() {
+  char *str1 = heap_alloc(10 * sizeof(char));
+  str1 = "Salut toi";
+  char *str2 = heap_alloc(20 * sizeof(char));
+  str2 = "Salut toiSalut toi!";
+  char *str3 = heap_alloc(30 * sizeof(char));
+  str3 = "Salut toiSalut toi!Salut toi!";
+
+  heap_free(str2);
+
+  char *str4 = heap_alloc(15 * sizeof(char));
+  str4 = "Salut toiSalut";
+
+  print_heap_node();
+  printf("%s\n", str1);
+  printf("%s\n", str3);
+  printf("%s\n", str4);
+  printf("\n");
+}
+
+int main() {
+  srand(time(NULL));
+
+  test_print_heap_info();
+  str_test();
+  test_print_heap_info();
 }
