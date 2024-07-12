@@ -4,7 +4,6 @@
 void *heap_node_alloc() {
   void *heap_node_addr = (void *)(heap.addr + heap.actual_size);
   heap.actual_size += sizeof(heap_node) + 1;
-
   return heap_node_addr;
 }
 

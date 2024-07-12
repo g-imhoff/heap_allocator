@@ -10,6 +10,7 @@ void test_print_heap_info() {
   printf("Actual_size : %ld\n", heap.actual_size);
   printf("Does it contain free memory : %s, highest free memory : %ld\n",
          heap.contains_free_memory ? "yes" : "no", heap.highest_free_memory);
+  printf("sizeof heap_node : %ld\n", sizeof(heap_node));
   printf("\n");
 }
 
@@ -58,8 +59,10 @@ void int_test() {
   printf("address of last element of e : %p, Address of h : %p\n", &e[499], h);
   printf("address of last element of h : %p, Address of h : %p\n", &h[189], i);
   printf("address of last element of i : %p, Address of g : %p\n", &i[8], g);
-  printf("sizeof heap_node : %ld", sizeof(heap_node));
+  printf("\n");
 }
+
+void low_size_test() { char *c = heap_alloc(sizeof(char)); }
 
 void str_test() {
   char *str1 = heap_alloc(10 * sizeof(char));
