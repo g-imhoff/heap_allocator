@@ -1,3 +1,4 @@
 heap_allocator
+heap_allocator.exe
 heap_allocator.so
 obj/
