@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -fPIC -g3 #-Wall -Wextra -Werror -pedantic
-EXEC = heap_allocator 
+EXEC = heap_allocator
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=obj/%.o)
 DEPS = $(wildcard src/*.h)
@@ -14,7 +14,7 @@ obj/%.o: src/%.c $(DEPS)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(EXEC)
+	rm -f $(EXEC) $(EXEC).so
 	rm -rf obj
 
 format:
@@ -22,4 +22,4 @@ format:
 		clang-format -i $$file; \
 	done \
 
-.phony: clean format 
+.phony: clean format

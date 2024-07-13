@@ -4,10 +4,12 @@
 
 void heap_free(void *addr) {
   heap_node *tmp = heap.heap;
+
+  // we search the size of the memory that we have free
   size_t size = heap_sizeof(addr);
 
+  // change the heap information in function
   if (heap.contains_free_memory) {
-
     heap.highest_free_memory =
         size > heap.highest_free_memory ? size : heap.highest_free_memory;
   } else {
@@ -15,6 +17,7 @@ void heap_free(void *addr) {
     heap.highest_free_memory = size;
   }
 
+  // change the status of the heap node
   while (tmp) {
     if (tmp->addr == addr) {
       tmp->free = true;
@@ -24,6 +27,4 @@ void heap_free(void *addr) {
 
     tmp = tmp->next;
   }
-
-  heap.actual_size -= size;
 }

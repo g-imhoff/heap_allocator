@@ -3,6 +3,7 @@
 #include "common.h"
 #include "heap_node.h"
 
+// This is the maximum heap size (64mb)
 #define HEAP_MAX_SIZE 64000000
 
 typedef struct {
@@ -24,7 +25,9 @@ typedef struct {
   struct h_node *heap;
 } heap_info;
 
+// allows the heap to be used in the rest of the program
 extern heap_info heap;
 
+// allows this two function to be used in the rest of the program
 extern void *heap_alloc(size_t size);
 extern void heap_free(void *addr);

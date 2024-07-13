@@ -94,6 +94,6 @@ int main() {
   srand(time(NULL));
 
   test_print_heap_info();
-  malloc_test();
+  int_test();
   test_print_heap_info();
 }
