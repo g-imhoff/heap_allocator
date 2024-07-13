@@ -1,6 +1,7 @@
 #include "./common.h"
 #include "heap.h"
 #include "heap_node.h"
+#include "my_string.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -23,7 +24,8 @@ void test_fill(int *ptr, size_t size) {
 void malloc_test() {
   int *i = malloc(2 * sizeof(int));
 
-  i[3] = 2; // WTF THIS WORKS ????
+  i[3] = 2; // WTF THIS WORKS ???? bro didn't thinks that handling bounds check
+            // would be a good idea ?
 }
 
 void int_test() {
@@ -72,16 +74,16 @@ void low_size_test() { char *c = heap_alloc(sizeof(char)); }
 
 void str_test() {
   char *str1 = heap_alloc(10 * sizeof(char));
-  str1 = "Salut toi";
+  str_cpy(str1, 10, "Salut toi");
   char *str2 = heap_alloc(20 * sizeof(char));
-  str2 = "Salut toiSalut toi!";
+  str_cpy(str2, 20, "Salut toiSalut toi!");
   char *str3 = heap_alloc(30 * sizeof(char));
-  str3 = "Salut toiSalut toi!Salut toi!";
+  str_cpy(str3, 30, "Salut toiSalut toi!Salut toi!");
 
   heap_free(str2);
 
   char *str4 = heap_alloc(15 * sizeof(char));
-  str4 = "Salut toiSalut";
+  str_cpy(str4, 15, "Salut toiSalut");
 
   print_heap_node();
   printf("%s\n", str1);
@@ -92,17 +94,19 @@ void str_test() {
 
 void test_frag() {
   char *str1 = heap_alloc(10 * sizeof(char));
-  str1 = "Salut toi";
+  printf("starting address : %p\n", heap.addr);
+  str_cpy(str1, 10, "Salut toi");
   char *str2 = heap_alloc(20 * sizeof(char));
-  str2 = "Salut toiSalut toi!";
+  str_cpy(str2, 20, "Salut toiSalut toi!");
 
   heap_free(str2);
 
   char *str3 = heap_alloc(15 * sizeof(char));
-  str3 = "Salut toiSalut";
+  str_cpy(str3, 15, "Salut toiSalut");
 
   char *str4 = heap_alloc(30 * sizeof(char));
-  str4 = "Salut toiSalut toi!Salut toi!";
+  str_cpy(str4, 30, "Salut toiSalut toi!Salut toi!");
+
   print_heap_node();
   printf("\n");
 }
