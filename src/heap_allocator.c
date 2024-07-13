@@ -33,7 +33,7 @@ void *heap_alloc(size_t size) {
   // if no free memory avaiable, allocate new memory
   void *heap_node_addr = heap_node_alloc();
   void *addr = (void *)(heap.addr + heap.actual_size);
-  heap.actual_size += size + 1;
+  add_actual_size(size);
 
   // then create a heap_node for the info and add this node
   heap_node *new_ptr = node_init(heap_node_addr, addr, size);

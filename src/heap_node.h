@@ -10,6 +10,7 @@ typedef struct h_node {
   struct h_node *previous;
 } heap_node;
 
+void add_actual_size(size_t size);
 heap_node *node_init(void *heap_node_addr, void *addr, size_t size);
 void heap_add_node(heap_node *node_ptr);
 void print_heap_node();

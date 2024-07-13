@@ -90,10 +90,27 @@ void str_test() {
   printf("\n");
 }
 
+void test_frag() {
+  char *str1 = heap_alloc(10 * sizeof(char));
+  str1 = "Salut toi";
+  char *str2 = heap_alloc(20 * sizeof(char));
+  str2 = "Salut toiSalut toi!";
+
+  heap_free(str2);
+
+  char *str3 = heap_alloc(15 * sizeof(char));
+  str3 = "Salut toiSalut";
+
+  char *str4 = heap_alloc(30 * sizeof(char));
+  str4 = "Salut toiSalut toi!Salut toi!";
+  print_heap_node();
+  printf("\n");
+}
+
 int main() {
   srand(time(NULL));
 
   test_print_heap_info();
-  int_test();
+  test_frag();
   test_print_heap_info();
 }

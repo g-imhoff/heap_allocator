@@ -1,11 +1,15 @@
 #include "heap_node.h"
 #include "heap.h"
 
+void add_actual_size(size_t size) {
+  heap.actual_size += size + 1; // 1 additional bytes for separation
+}
+
 void *heap_node_alloc() {
   // send the addr for this new heap_node
   void *heap_node_addr = (void *)(heap.addr + heap.actual_size);
   // change the size of the heap in function
-  heap.actual_size += sizeof(heap_node) + 1;
+  add_actual_size(sizeof(heap_node));
   return heap_node_addr;
 }
 
