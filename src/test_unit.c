@@ -1,8 +1,9 @@
-#include "./common.h"
+#include "common.h"
 #include "heap.h"
 #include "heap_node.h"
+#include "heap_free.h"
+#include "heap_allocator.h"
 #include "my_string.h"
-#include <stdlib.h>
 #include <time.h>
 
 void test_print_heap_info() {

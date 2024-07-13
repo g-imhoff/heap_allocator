@@ -1,21 +1,4 @@
-#include "common.h"
-#include "heap.h"
-#include "heap_node.h"
-#include <sys/mman.h>
-
-// init the heap at 0 everywhere
-heap_info heap = {0};
-
-void heap_init() {
-  // init the heap and is memory needed
-  heap.max = HEAP_MAX_SIZE;
-  heap.actual_size = 0;
-  // call mmap and ask him to give him 64mb of data
-  heap.addr = mmap(NULL, HEAP_MAX_SIZE, PROT_READ | PROT_WRITE,
-                   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-  heap.heap = NULL;
-  heap.is_init = 1;
-}
+#include "heap_allocator.h"
 
 void *heap_alloc(size_t size) {
   // init the heap in case it's not already made

@@ -1,6 +1,4 @@
-#include "common.h"
-#include "heap.h"
-#include "heap_node.h"
+#include "heap_free.h"
 
 void heap_free(void *addr) {
   heap_node *tmp = heap.heap;
@@ -26,4 +24,25 @@ void heap_free(void *addr) {
 
     tmp = tmp->next;
   }
+}
+
+void heap_unfree(void *addr) {
+  // set the heap_node corresponding to addr that is not free anymore
+  heap_node *tmp = heap.heap;
+
+  while (tmp) {
+    if (tmp->addr == addr) {
+      tmp->free = false;
+    }
+
+    tmp = tmp->next;
+  }
+}
+
+void *heap_free_alloc(size_t size) {
+  void *addr = heap_find_smallest(size);
+  heap_frag(addr, size);
+  heap_unfree(addr);
+
+  return addr;
 }

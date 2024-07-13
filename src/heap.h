@@ -28,6 +28,9 @@ typedef struct {
 // allows the heap to be used in the rest of the program
 extern heap_info heap;
 
-// allows this two function to be used in the rest of the program
-extern void *heap_alloc(size_t size);
-extern void heap_free(void *addr);
+void heap_init();
+void add_actual_size(size_t size);
+void print_heap_node();
+size_t heap_sizeof(void *addr);
+void *heap_find_smallest(size_t size);
+void heap_frag(void *addr, size_t size_needed);
